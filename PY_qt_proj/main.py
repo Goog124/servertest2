@@ -3,6 +3,7 @@ import requests
 from PyQt6 import uic  # Импортируем uic
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtGui import QPixmap
+from PyQt6.QtCore import Qt
 
 API_KEY = "5815d7d2-6bbe-424d-a32d-028b8c596fa2"
 
@@ -58,6 +59,54 @@ class MyWidget(QMainWindow):
 
         self.pixmap = QPixmap(self.map_file)
         self.map_picture.setPixmap(self.pixmap)
+
+    def keyPressEvent(self, event):
+        try:
+            if event.key() == Qt.Key.Key_PageUp:
+                tmp = int(self.lineEdit_delta.text())
+                tmp = min(21, tmp + 1)
+                self.lineEdit_delta.setText(str(tmp))
+                self.run()
+
+            if event.key() == Qt.Key.Key_PageDown:
+                tmp = int(self.lineEdit_delta.text())
+                tmp = max(1, tmp - 1)
+                self.lineEdit_delta.setText(str(tmp))
+                self.run()
+
+
+            if event.key() == Qt.Key.Key_W:
+                tmp = float(self.lineEdit_lat.text())
+                z = int(self.lineEdit_delta.text())
+                tmp += 10 / (z ** 3)
+                self.lineEdit_lat.setText(str(tmp))
+                self.run()
+
+            if event.key() == Qt.Key.Key_A:
+                tmp = float(self.lineEdit_lon.text())
+                z = int(self.lineEdit_delta.text())
+                tmp -= 10 / (z ** 3)
+                self.lineEdit_lon.setText(str(tmp))
+                self.run()
+
+            if event.key() == Qt.Key.Key_S:
+                tmp = float(self.lineEdit_lat.text())
+                z = int(self.lineEdit_delta.text())
+                tmp -= 10 / (z ** 3)
+                self.lineEdit_lat.setText(str(tmp))
+                self.run()
+
+            if event.key() == Qt.Key.Key_D:
+                tmp = float(self.lineEdit_lon.text())
+                z = int(self.lineEdit_delta.text())
+                tmp += 10 / (z ** 3)
+                self.lineEdit_lon.setText(str(tmp))
+                self.run()
+
+        except Exception as E:
+            self.statusBar().showMessage(E.__class__.__name__)
+            return
+
 
 
 

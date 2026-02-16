@@ -43,7 +43,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>0.10493199999999803</string>
+     <string>33.245</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -69,7 +69,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>0.06332400000000149</string>
+     <string>57.980</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -93,6 +93,9 @@
       <width>161</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>11</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
