@@ -102,18 +102,27 @@ def form_sample():
                             <h1>Форма для регистрации в суперсекретной системе</h1>
                             <div>
                                 <form class="login_form" method="post">
+                                    <input type="text" class="form-control" id="second_name" placeholder="Фамилия" name="second_name">
+                                    <input type="text" class="form-control" id="first_name" placeholder="Имя" name="first_name">
                                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите адрес почты" name="email">
-                                    <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
                                     <div class="form-group">
-                                        <label for="classSelect">В каком вы классе</label>
+                                        <label for="classSelect">Какое у Вас образование?</label>
                                         <select class="form-control" id="classSelect" name="class">
-                                          <option>7</option>
-                                          <option>8</option>
-                                          <option>9</option>
-                                          <option>10</option>
-                                          <option>11</option>
+                                          <option>Начальное</option>
+                                          <option>Колледж/училище</option>
+                                          <option>Высшее бакалавр</option>
+                                          <option>Высшее магистратура</option>
                                         </select>
                                      </div>
+                                    <div class="form-group form-check">
+                                        <label for="form-check">Укажите пол</label>
+                                        <input type="checkbox" class="form-check-input" id="work1" name="work1">
+                                        <label class="form-check-label" for="acceptRules">инженер-исследователь</label>
+                                        <input type="checkbox" class="form-check-input" id="work2" name="work2">
+                                        <label class="form-check-label" for="acceptRules">пилот</label>
+                                        <input type="checkbox" class="form-check-input" id="work3" name="work3">
+                                        <label class="form-check-label" for="acceptRules">строитель</label>
+                                    </div>
                                     <div class="form-group">
                                         <label for="about">Немного о себе</label>
                                         <textarea class="form-control" id="about" rows="3" name="about"></textarea>
