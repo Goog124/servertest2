@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if "инженер" in prof %}
+    <img src={{ url_for("static", filename="img/Тренажёр.png") }}>
+{% elif "строитель" in prof  %}
+    <img src={{ url_for("static", filename="img/Тренажёр2.png") }}>
+{% else %}
+    Не нужон!
+{% endif %}
+{% endblock %}
