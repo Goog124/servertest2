@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if "ol" == list %}
+    <ol>
+    {% for item in prof_list %}
+            <li>{{item}}</li>
+    {% endfor %}
+    </ol>
+
+{% elif "ul" == list %}
+    <ul>
+    {% for item in prof_list %}
+            <li>{{item}}</li>
+    {% endfor %}
+    </ul>
+
+{% else %}
+    Ошибка
+{% endif %}
+{% endblock %}

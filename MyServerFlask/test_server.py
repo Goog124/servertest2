@@ -14,8 +14,16 @@ def index(title):
 def training(prof):
     param = {}
     param['prof'] = prof
-    print(url_for('static', filename='img/mars.jpg'))
     return render_template('training.html', **param)
+
+
+@app.route('/list_prof/<list>')
+def list_prof(list):
+    data_prof = ["Инженер", "Строитель", "Медик", "Повар", "Пилот"]
+    param = {}
+    param['list'] = list
+    param['prof_list'] = data_prof
+    return render_template('list_prof.html', **param)
 
 
 if __name__ == '__main__':
