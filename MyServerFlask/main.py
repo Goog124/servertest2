@@ -23,6 +23,7 @@ def main():
     # db_sess.commit()
     for user in db_sess.query(User).all():
         print(user)
+
     # app.run()
 
 
