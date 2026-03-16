@@ -20,8 +20,7 @@ class User(SqlAlchemyBase):
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
 
-    job = orm.relationship("Jobs", back_populates='user')
+    # Jobs = orm.relationship("Jobs", back_populates='user')
 
     def __repr__(self):
-        return (f"{self.surname} {self.name} {self.age} {self.position} {self.speciality} "
-                f"{self.address} {self.email} {self.hashed_password}")
+        return f"<Colonist> {self.id} {self.surname} {self.name}"

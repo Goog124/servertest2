@@ -1,30 +1,25 @@
-from flask import Flask
+from flask import Flask, render_template, url_for
 from data import db_session
 
 from data.users import User
+from data.jobs import Jobs
+import datetime as dt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-def main():
+@app.route('/works')
+def table_works():
     db_session.global_init("db/mars_explorer.db")
     db_sess = db_session.create_session()
-    # user = User()
-    # user.surname = "Scott"
-    # user.name = "Ridley"
-    # user.age = 21
-    # user.position = "captain"
-    # user.speciality = "research engineer"
-    # user.address = "module_1"
-    # user.email = "scott_chief@mars.org"
-    # user.hashed_password = "cap"
-    # db_sess.add(user)
-    # db_sess.commit()
-    for user in db_sess.query(User).all():
-        print(user)
+    jobs = db_sess.query(Jobs).all()
+    print(jobs)
+    return render_template("works.html", jobs=jobs)
 
-    # app.run()
+
+def main():
+    app.run(port=8080, host='127.0.0.1')
 
 
 if __name__ == '__main__':
