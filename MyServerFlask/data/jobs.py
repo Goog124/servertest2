@@ -19,5 +19,5 @@ class Jobs(SqlAlchemyBase):
     user = orm.relationship('User')
 
     def __repr__(self):
-        return (f"{self.id} {self.team_leader} {self.job} {self.work_size} {self.collaborators} "
-                f"{self.start_date} {self.end_date} {self.is_finished}")
+        return (f"{self.id};{self.team_leader};{self.job};{self.work_size};{self.collaborators} "
+                f"{self.start_date};{self.end_date};{self.is_finished}")

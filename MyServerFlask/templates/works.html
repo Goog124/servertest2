@@ -1,31 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Работы</h1>
 {% for item in jobs%}
+<h2> Работа № {{loop.index}}  </h2>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Firstname</th>
-      <th scope="col">Lastname</th>
-      <th scope="col">Email</th>
+      <th scope="col">Название работы</th>
+      <th scope="col">фамилия и имя ответственного</th>
+      <th scope="col">продолжительность в часах</th>
+      <th scope="col">список id команды</th>
+      <th scope="col">завершена или нет</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>John</td>
-      <td>Doe</td>
-      <td>john@example.com</td>
+      <td>{{ item.job }}</td>
+      <td>{{ item.user.name }} {{ item.user.surname }}</td>
+      <td>{{ item.work_size }}</td>
+      <td>{{ item.collaborators }}</td>
+      {% if item.is_finished %}
+      <td>end</td>
+      {% else %}
+      <td>not end</td>
+      {% endif %}
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Mary</td>
-      <td>Moe</td>
-      <td>mary@example.com</td>
-    </tr>
-    <!-- More rows... -->
   </tbody>
 </table>
 {% endfor %}

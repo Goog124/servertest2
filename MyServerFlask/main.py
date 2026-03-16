@@ -14,11 +14,11 @@ def table_works():
     db_session.global_init("db/mars_explorer.db")
     db_sess = db_session.create_session()
     jobs = db_sess.query(Jobs).all()
-    print(jobs)
     return render_template("works.html", jobs=jobs)
 
 
 def main():
+    db_session.global_init("db/mars_explorer.db")
     app.run(port=8080, host='127.0.0.1')
 
 
