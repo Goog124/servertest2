@@ -1,6 +1,7 @@
+import flask_login
 from flask import Flask, render_template, url_for, request, make_response, redirect
 from data import db_session
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, login_required, logout_user
 from data.LoginForm import LoginForm
 
 from data.users import User
@@ -16,15 +17,18 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
-    return db_sess.get(User,user_id)
+    return db_sess.get(User, user_id)
 
 
 @app.route('/')
 def table_works():
-    db_session.global_init("db/mars_explorer.db")
-    db_sess = db_session.create_session()
-    jobs = db_sess.query(Jobs).all()
-    return render_template("works.html", jobs=jobs)
+    if flask_login.current_user.is_authenticated:
+        db_session.global_init("db/mars_explorer.db")
+        db_sess = db_session.create_session()
+        jobs = db_sess.query(Jobs).all()
+        return render_template("works.html", jobs=jobs)
+    else:
+        return redirect("/login")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -39,6 +43,12 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
 
 @app.route("/cookie_test")
 def cookie_test():

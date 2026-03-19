@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if current_user.is_authenticated %}
 {% for item in jobs%}
 <h2> Работа № {{loop.index}}  </h2>
 <table class="table">
@@ -28,4 +29,5 @@
   </tbody>
 </table>
 {% endfor %}
+{% endif %}
 {% endblock %}
