@@ -83,11 +83,16 @@ def reqister():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
-        user = User(
-            name=form.name.data,
-            email=form.email.data
-        )
+        user = User()
+        user.surname = form.surname.data
+        user.age = form.age.data
+        user.name = form.name.data
+        user.position = form.position.data
+        user.speciality = form.speciality.data
+        user.address = form.address.data
+        user.email = form.email.data
         user.set_password(form.password.data)
+        print(user)
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
