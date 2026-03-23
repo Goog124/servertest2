@@ -2,7 +2,7 @@ import flask_login
 from flask import Flask, render_template, url_for, request, make_response, redirect
 from data import db_session
 from flask_login import LoginManager, login_user, login_required, logout_user
-from data.LoginForm import LoginForm, RegisterForm
+from data.Forms import LoginForm, RegisterForm
 
 from data.users import User
 from data.jobs import Jobs
