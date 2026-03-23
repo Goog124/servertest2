@@ -2,7 +2,7 @@ import flask_login
 from flask import Flask, render_template, url_for, request, make_response, redirect
 from data import db_session
 from flask_login import LoginManager, login_user, login_required, logout_user
-from data.LoginForm import LoginForm
+from data.LoginForm import LoginForm, RegisterForm
 
 from data.users import User
 from data.jobs import Jobs
@@ -68,6 +68,30 @@ def cookie_test():
         res.set_cookie("visits_count", '1',
                        max_age=60 * 60 * 24 * 365 * 2)
     return res
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def reqister():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        if form.password.data != form.password_again.data:
+            return render_template('register.html', title='Регистрация',
+                                   form=form,
+                                   message="Пароли не совпадают")
+        db_sess = db_session.create_session()
+        if db_sess.query(User).filter(User.email == form.email.data).first():
+            return render_template('register.html', title='Регистрация',
+                                   form=form,
+                                   message="Такой пользователь уже есть")
+        user = User(
+            name=form.name.data,
+            email=form.email.data
+        )
+        user.set_password(form.password.data)
+        db_sess.add(user)
+        db_sess.commit()
+        return redirect('/login')
+    return render_template('register.html', title='Регистрация', form=form)
 
 
 def main():
