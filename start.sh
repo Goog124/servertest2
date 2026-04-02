@@ -1,5 +1,5 @@
 #!/bin/bash
-cd testserver1 # Your app working directory!!!
+cd BigWeb # Your app working directory!!!
 export PORT=5000
 unset PIP_USER
 
