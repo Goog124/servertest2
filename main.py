@@ -5,6 +5,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 from data.Forms import LoginForm, RegisterForm
 from flask_restful import Api
 from data import users_resource
+import os
 
 from data.users import User
 from data.jobs import Jobs
@@ -121,7 +122,8 @@ def main():
     # для одного объекта
     api.add_resource(users_resource.UsersResource, '/api/v2/users/<int:user_id>')
 
-    app.run(port=8080, host='127.0.0.1')
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host='0.0.0.0', port=port)
 
 
 if __name__ == '__main__':
