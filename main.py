@@ -1,14 +1,16 @@
 import flask_login
-from flask import Flask, render_template, url_for, request, make_response, redirect, jsonify
+from flask import Flask, render_template, request, make_response, redirect, jsonify
 from data import db_session, jobs_api
 from flask_login import LoginManager, login_user, login_required, logout_user
 from data.Forms import LoginForm, RegisterForm
+from flask_restful import Api
+from data import users_resource
 
 from data.users import User
 from data.jobs import Jobs
-import datetime as dt
 
 app = Flask(__name__)
+api = Api(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
@@ -113,6 +115,12 @@ def reqister():
 def main():
     db_session.global_init("db/mars_explorer.db")
     app.register_blueprint(jobs_api.blueprint)
+    # для списка объектов
+    api.add_resource(users_resource.UsersListResource, '/api/v2/users')
+
+    # для одного объекта
+    api.add_resource(users_resource.UsersResource, '/api/v2/users/<int:user_id>')
+
     app.run(port=8080, host='127.0.0.1')
 
 
